@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -89,12 +89,19 @@ void Agent::computeNewVelocity() {
     float term1 = dist + relPosOffsetDist;
     float offsetDistSq = absSq(stepOffset);
     float b = 0.5f * sqrtf(term1 * term1 - offsetDistSq);
+    if(b!=b) b = 0.0f;
     float twoB = 2.f * b;
     // Extra magnitude scaling term
     magnitude *= term1 / twoB;
     magnitude *= expf(-b / B);
     // Force direction
-    Vector2 forceDir = 0.5f * (relDir + (relPosOffset / relPosOffsetDist));
+    Vector2 forceDir = 0.5f * (relDir + (relPosOffset / relPosOffsetDist)); //length not exactly 1!
+    //Limit the magnitude
+    const float MAX_FORCE = 1e15f;
+    if (magnitude >= MAX_FORCE) {
+      magnitude = MAX_FORCE;
+      std::cout<<"magnitude >= MAX_FORCE"<<std::endl;
+    }
     force += magnitude * forceDir;
   }
 
