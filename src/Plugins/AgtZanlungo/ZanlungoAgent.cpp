@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -159,13 +159,15 @@ Vector2 Agent::agentForce(const Agent* other, float T_i) const {
   }
   dist -= (_radius + other->_radius);
   float magnitude = weight * Simulator::AGENT_SCALE * abs(_vel - other->_vel) / T_i;
+  
+  magnitude = magnitude * expf(-dist / D);
   const float MAX_FORCE = 1e15f;
   if (magnitude >= MAX_FORCE) {
     magnitude = MAX_FORCE;
   }
   // float magnitude = weight * Simulator::AGENT_SCALE * abs( myVel - hisVel ) / T_i;
   // 3. Compute the force
-  return D_ij * (magnitude * expf(-dist / D));
+  return D_ij * magnitude;//return D_ij * (magnitude * expf(-dist / D));
 }
 
 ////////////////////////////////////////////////////////////////
