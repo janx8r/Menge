@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -141,7 +141,8 @@ bool parseCommandParameters(int argc, char* argv[], ProjectSpec* spec, const Sim
                                             false, "", "string", cmd);
     TCLAP::ValueArg<float> durationArg("d", "duration",
                                        "Maximum duration of simulation (if "
-                                       "final state is not achieved.)  Defaults to 400 seconds.",
+                                       "final state is not achieved.)  Defaults to 400 seconds."
+                                       "If 0, then an endless simulation is executed.",
                                        false, -1.f, "float", cmd);
     TCLAP::ValueArg<float> timeStepArg("t", "timeStep",
                                        "Override the time step in the scene "
@@ -235,7 +236,7 @@ bool parseCommandParameters(int argc, char* argv[], ProjectSpec* spec, const Sim
     if (f > 0.f) spec->setTimeStep(f);
 
     f = durationArg.getValue();
-    if (f > 0.f) spec->setDuration(f);
+    if (f >= 0.f) spec->setDuration(f); //Allow a simulation duration of 0. If duration == 0, then a endless simulation is executed
 
     int seed = randomSeedArg.getValue();
     if (seed > -1) spec->setRandomSeed(seed);

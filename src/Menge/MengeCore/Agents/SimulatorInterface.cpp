@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -89,7 +89,7 @@ bool SimulatorInterface::step() {
   const int agtCount = static_cast<int>(getNumAgents());
   if (_isRunning) {
     if (_scbWriter) _scbWriter->writeFrame(_fsm);
-    if (_globalTime >= _maxDuration) {
+    if (_globalTime >= _maxDuration && _maxDuration > 0.0) {
       _isRunning = false;
     } else {
       for (size_t i = 0; i <= SUB_STEPS; ++i) {
