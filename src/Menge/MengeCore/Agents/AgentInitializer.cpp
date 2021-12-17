@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -65,6 +65,7 @@ const size_t CLASS = 0;                  ///< The default class
 const float PRIORITY = 0.f;              ///< The default priority
 const float MAX_ANGLE_VEL = TWOPI;       ///< The default maximum angular velocity
 const size_t OBSTACLE_SET = 0xFFFFFFFF;  ///< The default obstacle set (all obstacles)
+const size_t EXTERNAL = 0;
 
 ////////////////////////////////////////////////////////////////
 
@@ -86,6 +87,7 @@ AgentInitializer::AgentInitializer() {
   _obstacleSet = OBSTACLE_SET;
   _priority = PRIORITY;
   _class = CLASS;
+  _external = EXTERNAL;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -101,6 +103,7 @@ AgentInitializer::AgentInitializer(const AgentInitializer& init) {
   _obstacleSet = init._obstacleSet;
   _priority = init._priority;
   _class = init._class;
+  _external = init._external;
 
   std::vector<BFSM::VelModifier*>::const_iterator vItr = init._velModifiers.begin();
   for (; vItr != init._velModifiers.end(); ++vItr) {
@@ -143,6 +146,7 @@ void AgentInitializer::setDefaults() {
   _priority = PRIORITY;
   _obstacleSet = OBSTACLE_SET;
   _class = CLASS;
+  _external = EXTERNAL;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -196,6 +200,7 @@ bool AgentInitializer::setProperties(BaseAgent* agent) {
   agent->_obstacleSet = _obstacleSet;
   agent->_priority = _priority;
   agent->_class = _class;
+  agent->_external = _external;
 
   std::vector<BFSM::VelModifier*>::iterator vItr = _velModifiers.begin();
   for (; vItr != _velModifiers.end(); ++vItr) {
@@ -236,6 +241,8 @@ AgentInitializer::ParseResult AgentInitializer::setFromXMLAttribute(const ::std:
     result = constSizet(_class, value);
   } else if (paramName == "priority") {
     result = constFloat(_priority, value);
+  } else if (paramName == "external") {
+    result = constSizet(_external, value);
   }
 
   if (result == FAILURE) {

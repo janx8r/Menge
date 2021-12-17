@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -274,7 +274,9 @@ bool FSM::doStep() {
     Agents::BaseAgent* agt = this->_sim->getAgent(a);
     try {
       advance(agt);
-      this->computePrefVelocity(agt);
+      if (!agt->_external){
+        this->computePrefVelocity(agt);
+      }
     } catch (StateException& e) {
       logger << Logger::ERR_MSG << e.what() << "\n";
       ++exceptionCount;

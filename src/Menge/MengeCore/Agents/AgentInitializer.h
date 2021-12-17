@@ -391,6 +391,11 @@ class MENGE_API AgentInitializer {
   size_t _class;
 
   /*!
+   @brief    Specifies whether the agent is controlled externally or whether Menge should control the agent.
+   */
+  size_t _external;
+
+  /*!
    @brief    Velocity Modifiers to be applied to this class
    */
   std::vector<BFSM::VelModifier*> _velModifiers;

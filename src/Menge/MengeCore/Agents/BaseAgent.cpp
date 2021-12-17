@@ -3,7 +3,7 @@
 License
 
 Menge
-Copyright © and trademark ™ 2012-14 University of North Carolina at Chapel Hill.
+Copyright ï¿½ and trademark ï¿½ 2012-14 University of North Carolina at Chapel Hill.
 All rights reserved.
 
 Permission to use, copy, modify, and distribute this software and its documentation
@@ -65,6 +65,7 @@ BaseAgent::BaseAgent() {
   _nearAgents.clear();
   _nearObstacles.clear();
   _class = 0;
+  _external = 0;
   _obstacleSet = 0xFFFFFFFF;
   _priority = 0.f;
   _id = 0;

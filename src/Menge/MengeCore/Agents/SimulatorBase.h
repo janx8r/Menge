@@ -187,12 +187,14 @@ void SimulatorBase<Agent>::doStep() {
 #pragma omp parallel for
   for (int i = 0; i < AGT_COUNT; ++i) {
     computeNeighbors(&(_agents[i]));
-    _agents[i].computeNewVelocity();
+    if(!_agents[i]._external)
+      _agents[i].computeNewVelocity();
   }
 
 #pragma omp parallel for
   for (int i = 0; i < AGT_COUNT; ++i) {
-    _agents[i].update(TIME_STEP);
+    if(!_agents[i]._external)
+      _agents[i].update(TIME_STEP);
   }
 
   _globalTime += TIME_STEP;

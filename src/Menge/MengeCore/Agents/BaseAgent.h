@@ -263,6 +263,13 @@ class MENGE_API BaseAgent : public ProximityQuery {
   size_t _class;
 
   /*!
+   @brief    Specifies whether the agent is controlled externally (_external != 0) or whether Menge should control the agent (_external == 0).
+
+   */
+  size_t _external;
+
+
+  /*!
    @brief    A mask indicating the obstacles with compatible ids which this agent can see.
 
    This is a bitwise mask such that if the ith bit is 1, obstacles with id 2^i are visible.
